@@ -149,7 +149,7 @@ function App() {
       <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-black"></div>
         <div className="relative z-10 text-center max-w-4xl mx-auto px-6">
-          <p className="text-blue-400 text-lg mb-4">Hi, my name is</p>
+          <p className="text-blue-400 text-lg mb-4">Hello, my name is</p>
           <h1 className="text-5xl md:text-7xl font-bold mb-4 leading-[1.25] inline-block bg-gradient-to-r from-blue-400 via-purple-500 to-pink-400 bg-clip-text text-transparent pb-[2px]">
             Yash Sharad Agarwal
           </h1>
@@ -450,32 +450,26 @@ function App() {
               
               <div className="space-y-6">
                 <div className="flex items-center">
-                  <div className="bg-blue-600 p-3 rounded-lg mr-4">
-                    <span className="text-xl">📧</span>
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-semibold">Email</h4>
-                    <p className="text-gray-400">yasha9340@gmail.com</p>
+                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-mail w-6 h-6 text-white"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg></div>
+                  <div> 
+                    <h4 className="text-lg font-semibold"> &nbsp; Email</h4>
+                    <p className="text-gray-400">&nbsp; yasha9340@gmail.com</p>
                   </div>
                 </div>
                 
                 <div className="flex items-center">
-                  <div className="bg-blue-600 p-3 rounded-lg mr-4">
-                    <span className="text-xl">📍</span>
-                  </div>
+                  <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-map-pin w-6 h-6 text-white"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg></div>
                   <div>
-                    <h4 className="text-lg font-semibold">Location</h4>
-                    <p className="text-gray-400">Mumbai, Maharashtra, India</p>
+                    <h4 className="text-lg font-semibold">&nbsp; Location</h4>
+                    <p className="text-gray-400">&nbsp; Mumbai, Maharashtra, India</p>
                   </div>
-                </div>
+                </div>  
 
-                <div className="flex items-center">
-                  <div className="bg-blue-600 p-3 rounded-lg mr-4">
-                    <span className="text-xl">📞</span>
-                  </div>
+                <div className="flex items-center ">
+                  <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-phone w-6 h-6 text-white"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></div>
                   <div>
-                    <h4 className="text-lg font-semibold">Phone</h4>
-                    <p className="text-gray-400">+91 8369200915</p>
+                    <h4 className="text-lg font-semibold">&nbsp; Phone</h4>
+                    <p className="text-gray-400">&nbsp; +91 8369200915</p>
                   </div>
                 </div>
               </div>
