@@ -1,6 +1,5 @@
 import { useState } from "react"
 
-
 function App() {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
@@ -83,32 +82,42 @@ function App() {
     {
       title: "BlogSpace",
       icon: "📝",
-      description: "Developed a modern blogging platform with authentication, CRUD operations for posts, rich text editor, image uploads, and responsive UI using React, Redux, Tailwind CSS, and Appwrite.",
-      tags: ["React", "Redux", "TailwindCSS", "Appwrite", "CRUD Operations", "Responsive UI"]
+      description: "Blog space. - Developed a full-featured blogging platform with user authentication, post CRUD operations, rich text editing, image uploads, and a responsive UI, leveraging React, Redux, Tailwind CSS, and Appwrite.",
+      tags: ["React", "Redux", "TailwindCSS", "Appwrite", "CRUD Operations", "Responsive UI"],
+      livelink : "https://blog-space-git-main-yash-agarwals-projects-5132f746.vercel.app/",
+      githubrepo : "https://github.com/ayash2004/BlogSpace",
     },
     {
       title: "Weather App",
       icon: "🌦",
-      description: "Built a responsive dashboard with real-time weather updates and city search functionality using React, Tailwind CSS, and OpenWeather API.",
-      tags: ["React", "Tailwind", "OpenWeather API", "Responsive Design"]
+      description: "Built a responsive dashboard with real-time weather updates and city search functionality using React, Tailwind CSS, and the OpenWeather API.",
+      tags: ["React", "Tailwind", "OpenWeather API", "Responsive Design"],
+      livelink : "https://weather-api-git-main-yash-agarwals-projects-5132f746.vercel.app/",
+      githubrepo : "https://github.com/ayash2004/WeatherAPI",
     },
     {
       title: "To-Do Manager",
       icon: "✅", 
-      description: "Developed CRUD operations (add/edit/delete) with local storage persistence for seamless task management experience.",
-      tags: ["React", "CRUD Operations", "Local Storage", "DOM Manipulation"]
+      description: "Implemented CRUD operations (add/edit/delete) with local storage persistence to  seamless task management experience.",
+      tags: ["React", "CRUD Operations", "Local Storage", "DOM Manipulation"],
+      livelink : "https://todo-manager-git-main-yash-agarwals-projects-5132f746.vercel.app/",
+      githubrepo : "https://github.com/ayash2004/Todo-Manager",
     },
     {
       title: "News App",
       icon: "📰",
-      description: "Integrated News API with search & filter functionality for dynamic content delivery and enhanced user experience.",
-      tags: ["API Integration", "JavaScript", "Search & Filter", "Dynamic Content"]
+      description: "Integrated News API with search and filter features to deliver dynamic content delivery and improve user experience.",
+      tags: ["API Integration", "JavaScript", "Search & Filter", "Dynamic Content"],
+      livelink : "",
+      githubrepo : "",
     },
     {
       title: "Form Validation with Appwrite",
       icon: "🔐",
-      description: "Implemented comprehensive validation rules and connected frontend to Appwrite database for secure data handling.",
-      tags: ["Form Validation", "Appwrite", "Database Integration", "Security"]
+      description: "Implemented robust form validation rules and integrated the frontend with the Appwrite database to ensure secure and reliable data handling. " ,
+      tags: ["Form Validation", "Appwrite", "Database Integration", "Security"],
+      livelink : "",
+      githubrepo : "",
     }
   ]
 
@@ -148,8 +157,7 @@ function App() {
              Web Developer | Mumbai, Maharashtra
           </h2>
           <p className="text-gray-400 text-lg mb-8 max-w-2xl mx-auto">
-            Building beautiful, responsive web applications with modern JavaScript frameworks. 
-            Transforming ideas into elegant digital experiences.
+            Developing responsive, user-friendly web applications with modern JavaScript frameworks. Turning ideas into seamless and refined digital experiences.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="#projects" className="bg-gradient-to-r from-blue-600 to-purple-600 px-8 py-3 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all transform hover:scale-105">
@@ -177,16 +185,13 @@ function App() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <p className="text-gray-300 text-lg leading-relaxed mb-6">
-                I'm an aspiring Web Developer with hands-on experience in JavaScript, React, and API integrations. 
-                Strong academic background (B.Sc. IT – CGPA 8.85) and certified in CCNA & Advanced Excel.
+                An aspiring Web Developer with hands-on experience in JavaScript, React, and API integrations. Holds a B.Sc. in IT (CGPA: 8.85) along with certifications in CCNA and Advanced Excel.
               </p>
               <p className="text-gray-300 text-lg leading-relaxed mb-6">
-                I gained valuable experience in technical support at TCS, where I honed my problem-solving 
-                and communication skills while resolving 30+ customer issues daily and mentoring new team members.
+                Gained valuable experience at TCS in technical support, resolving 30+ customer issues daily and mentoring new team members, while sharpening problem-solving and communication skills.
               </p>
               <p className="text-gray-300 text-lg leading-relaxed">
-                I'm passionate about building scalable web applications and eager to contribute to real-world 
-                projects that make a difference.
+                Passionate about building scalable web applications and eager to contribute to real-world projects that make a difference
               </p>
             </div>
             <div className="flex justify-center">
@@ -246,16 +251,41 @@ function App() {
                 <p className="text-gray-300 mb-4 leading-relaxed">
                   {project.description}
                 </p>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 mb-4">
                   {project.tags.map((tag, tagIndex) => (
                     <span key={tagIndex} className="bg-blue-600/20 text-blue-400 px-3 py-1 rounded-full text-sm hover:bg-purple-600">
                       {tag}
                     </span>
                   ))}
                 </div>
-              </div>
+
+              <div className="flex gap-4 mt-4 ">
+                {/* <!-- Code Button --> */}
+                <a href={project.githubrepo} target="_blank" className="inline-flex items-center gap-2 px-4 py-2 bg-transparent border border-blue-500 text-blue-400 rounded-md hover:bg-blue-500 hover:text-white transition-colors duration-200 no-underline">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M16 18l6-6-6-6"/>
+                        <path d="M8 6l-6 6 6 6"/>
+                    </svg>
+                    Code
+                </a>
+
+                {/* <!-- View Project Button --> */}
+                <a href={project.livelink} target="_blank" className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-md hover:from-purple-600 hover:to-pink-600 transition-all duration-200 no-underline">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14,2 14,8 20,8"/>
+                        <line x1="16" y1="13" x2="8" y2="13"/>
+                        <line x1="16" y1="17" x2="8" y2="17"/>
+                        <polyline points="10,9 9,9 8,9"/>
+                    </svg>
+                    View Project
+                </a>
+            </div>
+               </div>
+              
             ))}    
              </div>
+             
           </div>
       </section>
 
@@ -283,7 +313,7 @@ function App() {
                 <h4 className="text-lg font-semibold mb-2">🏆 Academic Highlights</h4>
                 <p className="text-green-400 font-bold">CGPA: 8.85</p>
                 <p className="text-gray-300 mt-2">
-                  Strong academic performance with focus on programming fundamentals, database systems, 
+                  Demonstrated  Strong academic performance with focus on programming fundamentals, database systems, 
                   web technologies, and software engineering principles.
                 </p>
               </div>
@@ -340,10 +370,10 @@ function App() {
               <div>
                 <h4 className="text-lg font-semibold mb-3">🎯 Key Responsibilities</h4>
                 <ul className="space-y-2 text-gray-300">
-                  <li>• Operational Efficiency : Resolved 30+ customer issues daily (WiFi & SIM)</li>
-                  <li>• Performance : Regularly exceeded performance targets, demonstrating strong problem-solving abilities and attention to detail.</li>
-                  <li>• Training and Development : Mentored and trained new team members, fostering a collaborative work environment.</li>
-                  <li>• Worked alongside a 20-person support team, improving communication and troubleshooting workflows.</li>
+                  <li>• Operational Efficiency : Resolved 30+ customer issues daily (WiFi & SIM), ensuring timely and effective support.</li>
+                  <li>• Performance Excellence: Consistently exceeded performance targets through strong problem-solving skills and attention to detail.</li>
+                  <li>• Training & Development: Mentored and onboarded new team members, contributing to a collaborative and high-performing work environment.</li>
+                  <li>• Team Collaboration: Worked closely with a 20-member support team, enhancing communication and streamlining troubleshooting workflows.</li>
                 </ul>
               </div>
               <div>
@@ -415,7 +445,7 @@ function App() {
               <p className="text-gray-300 text-lg leading-relaxed mb-8">
                 I'm always interested in new opportunities and exciting projects. Whether you have a web development project, 
                 need help with React applications, or just want to discuss technology and career opportunities, 
-                I'd love to hear from you!
+                I'd love to hear from you!. Let's building something together.
               </p>
               
               <div className="space-y-6">
@@ -445,7 +475,7 @@ function App() {
                   </div>
                   <div>
                     <h4 className="text-lg font-semibold">Phone</h4>
-                    <p className="text-gray-400">8369200915</p>
+                    <p className="text-gray-400">+91 8369200915</p>
                   </div>
                 </div>
               </div>
@@ -453,7 +483,7 @@ function App() {
             
             <div className="bg-gray-800 rounded-2xl p-8">
               <h3 className="text-2xl font-bold mb-2">Send a Message</h3>
-              <p className="text-gray-400 mb-6">Fill out the form below and I'll get back to you within 24 hours.</p>
+              <p className="text-gray-400 mb-6">Complete the form below and I'll get back to you within 24 hours.</p>
               
               {/* Success Message */}
               {success && (
@@ -558,7 +588,7 @@ function App() {
       <footer className="py-8 px-6 border-t border-gray-800">
         <div className="max-w-6xl mx-auto text-center">
           <p className="text-gray-400">
-            © 2024 Yash Sharad Agarwal. Built with React & Tailwind CSS.
+            © 2025 Yash Sharad Agarwal. Built with React & Tailwind CSS.
           </p>
           <div className="flex justify-center space-x-6 mt-4">
             <a href="mailto:agrawalyash329@gmail.com" className="text-gray-400 hover:text-blue-400 transition-colors">
