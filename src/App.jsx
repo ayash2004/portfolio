@@ -1,4 +1,5 @@
 import { useState } from "react"
+import emailjs from "emailjs-com";
 
 function App() {
   const [name, setName] = useState("")
@@ -6,7 +7,9 @@ function App() {
   const [message, setMessage] = useState("")
   const [success, setSuccess] = useState("")
   const [errors, setErrors] = useState({})
-
+  const service_id = import.meta.env.VITE_SERVICE_ID    
+  const template_id = import.meta.env.VITE_TEMPLATE_ID
+  const public_key = import.meta.env.VITE_PUBLIC_KEY
   const validateForm = () => {
     const newErrors = {}
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
@@ -39,26 +42,46 @@ function App() {
     return false
   }
   
-  async function submitForm() {
-    console.log(`The name is ${name}, Email is ${email} and the Content typed is ${message}`)
-    
-    // Clear form
-    setName("")
-    setEmail("")
-    setMessage("")
-    setErrors({})
-    setSuccess("Message sent successfully!")
-    
-    // Clear success message after 5 seconds
-    setTimeout(() => {
-      setSuccess("")
-    }, 5000)
+  const submitForm = () => {
+    const templateParams = {
+      name,
+      email,
+      message,
+    }
+
+    emailjs
+      .send(
+        service_id,  
+        template_id, 
+        templateParams,
+        public_key   
+      )
+      .then(
+        (response) => {
+          console.log("SUCCESS!", response.status, response.text)
+          setSuccess("✅ Message sent successfully!")
+          setName("")
+          setEmail("")  
+          setMessage("")
+          setErrors({})
+
+          setTimeout(() => {
+          setSuccess("");
+        }, 3000);
+        },
+        (err) => {
+          console.error("FAILED...", err)
+          setSuccess("❌ Failed to send message. Try again later.")
+        }
+      )
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    validateForm()
-  }
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" && e.target.tagName !== "TEXTAREA") {
+      e.preventDefault(); // stop default new line
+      validateForm();     // run your validation + submit
+    }
+  };
 
   const skills = [
     {
@@ -82,7 +105,7 @@ function App() {
     {
       title: "BlogSpace",
       icon: "📝",
-      description: "Blog space. - Developed a full-featured blogging platform with user authentication, post CRUD operations, rich text editing, image uploads, and a responsive UI, leveraging React, Redux, Tailwind CSS, and Appwrite.",
+      description: " Developed a full-featured blogging platform with user authentication, post CRUD operations, rich text editing, image uploads, and a responsive UI, leveraging React, Redux, Tailwind CSS, and Appwrite.",
       tags: ["React", "Redux", "TailwindCSS", "Appwrite", "CRUD Operations", "Responsive UI"],
       livelink : "https://blog-space-git-main-yash-agarwals-projects-5132f746.vercel.app/",
       githubrepo : "https://github.com/ayash2004/BlogSpace",
@@ -109,7 +132,7 @@ function App() {
       description: "Integrated News API with search and filter features to deliver dynamic content delivery and improve user experience.",
       tags: ["API Integration", "JavaScript", "Search & Filter", "Dynamic Content"],
       livelink : "",
-      githubrepo : "",
+      githubrepo : "/",
     },
     {
       title: "Form Validation with Appwrite",
@@ -128,7 +151,7 @@ function App() {
         <div className="max-w-6xl mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
             <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-              YA
+              Yash Agarwal
             </div>
             <div className="hidden md:flex space-x-8">
               <a href="#about" className="hover:text-blue-400 transition-colors">About</a>
@@ -142,11 +165,9 @@ function App() {
         </div>
       </nav>
 
-      <span className="tool-pill">Git</span>
-<span className="tool-pill">GitHub</span>
 
       {/* Hero Section */}
-      <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
+      <section className="pt-28 pb-16 px-6 min-h-screen flex items-center justify-center relative">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-black"></div>
         <div className="relative z-10 text-center max-w-4xl mx-auto px-6">
           <p className="text-blue-400 text-lg mb-4">Hello, my name is</p>
@@ -168,9 +189,10 @@ function App() {
             </a>
           </div>
         </div>
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-gray-400 rounded-full mt-2"></div>
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 transform animate-bounce">
+          <div className="w-5 h-8 sm:w-6 sm:h-10 border-2 border-gray-400 rounded-full flex justify-center">
+            <div className="w-1 h-2 sm:h-3 bg-gray-400 rounded-full mt-2"></div>
           </div>
         </div>
       </section>
@@ -441,11 +463,9 @@ function App() {
           </div>
           <div className="grid md:grid-cols-2 gap-12">
             <div>
-              <h3 className="text-2xl font-bold mb-6">Let's Build Something Amazing Together</h3>
+              <h3 className="text-2xl font-bold mb-6">Let's Build Something Amazing Together</h3> 
               <p className="text-gray-300 text-lg leading-relaxed mb-8">
-                I'm always interested in new opportunities and exciting projects. Whether you have a web development project, 
-                need help with React applications, or just want to discuss technology and career opportunities, 
-                I'd love to hear from you!. Let's building something together.
+                I'm always open to exploring new opportunities and innovative projects. Whether you’re looking for support with web development, need expertise in React applications, or simply want to connect and chat about technology and career possibilities, I'd love to hear from you!
               </p>
               
               <div className="space-y-6">
@@ -493,7 +513,12 @@ function App() {
                 </div>
               )}
 
-              <div className="space-y-6">
+              <form onSubmit={(e) => {
+                e.preventDefault()
+                validateForm()
+               }}
+                onKeyDown={handleKeyDown}
+                className="space-y-6" >
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
                     Your Name
@@ -566,20 +591,68 @@ function App() {
                   )}
                 </div>
 
-                <button
+                <button 
                   type="submit"
                   className="w-full py-3 px-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                 >
                   ✈️ Send Message
                 </button>
-              </div>
+            </form>
             </div>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-8 px-6 border-t border-gray-800">
+      <footer className="bg-black border-t border-gray-800 py-10 px-6">
+        <div className="max-w-6xl mx-auto">
+          {/* Top: Links + Social */}
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            {/* Brand / Name */}
+            <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+              Yash Agarwal
+            </div>
+
+            {/* Quick Links */}
+            <div className="flex space-x-6 text-gray-400">
+              <a href="#about" className="hover:text-blue-400 transition">About</a>
+              <a href="#skills" className="hover:text-blue-400 transition">Skills</a>
+              <a href="#projects" className="hover:text-blue-400 transition">Projects</a>
+              <a href="#contact" className="hover:text-blue-400 transition">Contact</a>
+            </div>
+
+            {/* Social Icons */}
+            <div className="flex space-x-5 text-gray-400">
+              <a href="https://github.com/ayash2004" target="_blank" className="hover:text-blue-400 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="w-6 h-6" viewBox="0 0 24 24">
+                  <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.29 9.42 7.86 10.96.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.3-1.28-1.65-1.28-1.65-1.05-.7.08-.68.08-.68 1.16.08 1.77 1.2 1.77 1.2 1.04 1.77 2.73 1.26 3.4.96.1-.75.41-1.26.75-1.55-2.55-.3-5.23-1.27-5.23-5.65 0-1.25.44-2.28 1.16-3.08-.12-.3-.5-1.52.1-3.18 0 0 .96-.3 3.14 1.18a10.94 10.94 0 0 1 5.72 0c2.18-1.48 3.14-1.18 3.14-1.18.6 1.66.22 2.88.1 3.18.72.8 1.16 1.83 1.16 3.08 0 4.4-2.68 5.35-5.24 5.64.42.37.8 1.1.8 2.22v3.3c0 .31.2.66.8.55A10.99 10.99 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/>
+                </svg>
+              </a>
+              <a href="https://www.linkedin.com/in/yashagarwal2004" target="_blank" className="hover:text-blue-400 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="w-6 h-6" viewBox="0 0 24 24">
+                  <path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.77 0 5-2.24 5-5v-14c0-2.76-2.23-5-5-5zM8.34 20h-3.03v-9.9h3.03V20zM6.82 8.65c-.97 0-1.75-.79-1.75-1.76s.78-1.76 1.75-1.76c.97 0 1.76.79 1.76 1.76s-.79 1.76-1.76 1.76zM20 20h-3.03v-5.33c0-1.27-.03-2.91-1.77-2.91-1.77 0-2.04 1.38-2.04 2.82V20h-3.03v-9.9h2.9v1.35h.04c.4-.75 1.38-1.55 2.85-1.55 3.05 0 3.61 2 3.61 4.59V20z"/>
+                </svg>
+              </a>
+               <a href="mailto:agrawalyash329@gmail.com" className="hover:text-blue-400 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="w-6 h-6" viewBox="0 0 24 24">
+                  <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 
+                  1.1.9 2 2 2h16c1.1 0 2-.9 
+                  2-2V6c0-1.1-.9-2-2-2zm0 
+                  4-8 5-8-5V6l8 5 8-5v2z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          {/* Bottom: Copyright */}
+          <div className="text-center text-gray-500 text-sm mt-8">
+            © {new Date().getFullYear()} Yash Sharad Agarwal. Built with 💙 React & Tailwind CSS.
+          </div>
+        </div>
+      </footer>
+
+      {/* Footer */}
+      {/* <footer className="py-8 px-6 border-t border-gray-800">
         <div className="max-w-6xl mx-auto text-center">
           <p className="text-gray-400">
             © 2025 Yash Sharad Agarwal. Built with React & Tailwind CSS.
@@ -593,7 +666,7 @@ function App() {
             </a>
           </div>
         </div>
-      </footer>
+      </footer> */}
     </div>
   )
 }
